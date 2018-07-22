@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 const placeSchema = mongoose.Schema(
   {
+    world: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
     name: {
       type: String,
       trim: true,

@@ -4,8 +4,8 @@
   "description": "private",
   "main": "index.js",
   "scripts": {
-    "mongod": "mongod -f .env.mongo.local --quiet &",
-    "server": "nodemon ./server.js"
+    "mongod": "mongod -f .config/mongo.conf --quiet &",
+    "serve": "nodemon ./server.js"
   },
   "author": "",
   "license": "ISC",
