@@ -5,6 +5,12 @@ const worldSchema = mongoose.Schema(
     name: {
       type: String,
       trim: true,
+      required: true,
+    },
+    description: {
+      type: String,
+      trim: true,
+      default: '',
     },
   },
   {

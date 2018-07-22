@@ -25,4 +25,17 @@ router.get('/world/:id', (req, res) => {
   });
 });
 
+router.post('/world', (req, res) => {
+  const body = Object.assign({}, req.body) || {};
+  World.create(body, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      console.log(results);
+      res.sendStatus(200);
+    }
+  });
+});
+
 module.exports = router;
