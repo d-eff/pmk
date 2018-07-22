@@ -4,11 +4,15 @@
   "description": "private",
   "main": "index.js",
   "scripts": {
-    "mongod": "mongod -f .env.mongo.local --quiet &"
+    "mongod": "mongod -f .env.mongo.local --quiet &",
+    "server": "nodemon ./server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }
