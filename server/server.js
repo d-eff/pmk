@@ -1,18 +1,15 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const app = express();
-require('./db/db.js');
-const world = require('./db/schemas/world.js');
+require('./db.js');
 
 app.get('/', (req, res) => {
-  world.find((err, results) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(500);
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.json(results);
-    }
-  });
+  res.send('hi');
+});
+
+fs.readdirSync(path.join(__dirname, 'routes')).map((file) => {
+  app.use(require(`./routes/${file}`));
 });
 
 app.listen(3000, () => {

@@ -28,7 +28,10 @@
     },
     "extends": "airbnb",
     "rules": {
+      "array-callback-return": "off",
+      "global-require": "off",
       "import/newline-after-import": "off",
+      "import/no-dynamic-require": "off",
       "no-console": "off"
     }
   }
