@@ -4,8 +4,7 @@ node_modules
 /data
 
 # local env files
-.env.local
-.env.*.local
+.config/
 
 # Log files
 npm-debug.log*
