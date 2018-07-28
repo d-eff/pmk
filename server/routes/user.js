@@ -22,7 +22,7 @@ router.post('/login', async (req, res, next) => {
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
         const body = { _id: user.id, username: user.username };
-        const token = jwt.sign({ user: body }, config.jwtSecret, { expiresIn: '1d' });
+        const token = jwt.sign({ user: body }, config.jwtSecret, { expiresIn: '1d', algorithm: 'HS512' });
         return res.json({ token });
       });
     } catch (error) {
