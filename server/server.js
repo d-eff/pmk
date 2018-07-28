@@ -15,11 +15,10 @@ require('./utils/auth');
 app.use(cors());
 // hook in body-parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // TODO: Automate doc generation
 app.get('/', (req, res) => {
-  res.sendFile('./index.html', { root: __dirname });
+  res.sendFile('./public/index.html', { root: __dirname });
 });
 
 // Load routes

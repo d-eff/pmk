@@ -5,6 +5,19 @@ const Extract = require('passport-jwt').ExtractJwt;
 const userModel = require('../models/userModel.js');
 const config = require('../.config/dev.config.js');
 
+passport.use('signup', new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password',
+},
+async (username, password, cb) => {
+  try {
+    const user = await userModel.create({ username, password });
+    return cb(null, user);
+  } catch (err) {
+    return cb(err);
+  }
+}));
+
 passport.use('login', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -29,7 +42,7 @@ async (username, password, cb) => {
 
 passport.use(new JWTStrategy({
   secretOrKey: config.jwtSecret,
-  jwtFromRequest: Extract.fromUrlQueryParameter('secret_token'),
+  jwtFromRequest: Extract.fromAuthHeaderAsBearerToken(),
 }, async (token, done) => {
   try {
     return done(null, token.user);

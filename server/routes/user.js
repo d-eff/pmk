@@ -12,14 +12,13 @@ router.post('/login', async (req, res, next) => {
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
         const body = { _id: user.id, username: user.username };
-        const token = jwt.sign({ user: body }, config.jwtSecret);
+        const token = jwt.sign({ user: body }, config.jwtSecret, { expiresIn: '1d' });
         return res.json({ token });
       });
     } catch (error) {
       return next(error);
     }
-    // this linter is killing me
-    return false;
+    return next();
   })(req, res, next);
 });
 
