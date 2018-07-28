@@ -41,9 +41,9 @@ async (username, password, cb) => {
 }));
 
 passport.use(new JWTStrategy({
-  secretOrKey: config.jwtSecret,
+  secretOrKey: config.jwt.secret,
   jwtFromRequest: Extract.fromAuthHeaderAsBearerToken(),
-  algorithms: ['HS512'],
+  algorithms: [config.jwt.algorithm],
 }, async (token, done) => {
   try {
     return done(null, token.user);

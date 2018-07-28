@@ -13,6 +13,7 @@ require('./utils/auth');
 
 // tap the rockies
 app.use(cors());
+
 // hook in body-parser
 app.use(bodyParser.json());
 
