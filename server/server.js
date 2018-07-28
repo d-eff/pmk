@@ -3,10 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 // initialize mongo connection
 require('./db.js');
 
+// tap the rockies
+app.use(cors());
 // hook in body-parser
 app.use(bodyParser.json());
 
