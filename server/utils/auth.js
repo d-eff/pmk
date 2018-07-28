@@ -16,7 +16,7 @@ async (username, password, cb) => {
       return cb(null, false, { message: 'no entrar' });
     }
 
-    const valid = await userModel.validatePassword(password);
+    const valid = await user.validatePassword(password);
     if (!valid) {
       return cb(null, false, { message: 'no entrar' });
     }

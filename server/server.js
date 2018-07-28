@@ -15,6 +15,7 @@ require('./utils/auth');
 app.use(cors());
 // hook in body-parser
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // TODO: Automate doc generation
 app.get('/', (req, res) => {
