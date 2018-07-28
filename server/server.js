@@ -6,7 +6,10 @@ const app = express();
 const cors = require('cors');
 
 // initialize mongo connection
-require('./db.js');
+require('./utils/db');
+
+// initialize passport and jwt
+require('./utils/auth');
 
 // tap the rockies
 app.use(cors());

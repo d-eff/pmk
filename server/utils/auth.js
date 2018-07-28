@@ -1,6 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const userModel = require('./models/userModel.js');
+const JWTStrategy = require('passport-jwt').Strategy;
+const Extract = require('passport-jwt').ExtractJwt;
+const userModel = require('../models/userModel.js');
+const config = require('../.config/dev.config.js');
 
 passport.use('login', new LocalStrategy({
   usernameField: 'username',
@@ -22,4 +25,16 @@ async (username, password, cb) => {
   } catch (err) {
     return cb(err);
   }
+}));
+
+passport.use(new JWTStrategy({
+  secretOrKey: config.jwtSecret,
+  jwtFromRequest: Extract.fromUrlQueryParameter('secret_token'),
+}, async (token, done) => {
+  try {
+    return done(null, token.user);
+  } catch (err) {
+    done(err);
+  }
+  return false;
 }));
