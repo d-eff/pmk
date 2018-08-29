@@ -15,6 +15,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    worlds: {
+      type: [mongoose.Schema.Types.ObjectId],
+    },
   },
   {
     collection: 'users',

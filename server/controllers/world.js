@@ -11,14 +11,19 @@ module.exports.getAll = async (req, res) => {
   }
 };
 
+// TODO: HEY SHOULDN'T WE BE ABLE TO GET WORLDS PER USER YA SPOON
+
 module.exports.getOne = async (req, res) => {
   try {
+    // TODO: Validate that the user can access that world
+    // TODO: actually grok middleware
     const world = await World.findById(req.params.id);
     res.setHeader('Content-Type', 'application/json');
     res.json(world);
   } catch (error) {
+    console.log('HI');
     console.log(error);
-    res.sendStatus(500);
+    res.sendStatus(error.status);
   }
 };
 

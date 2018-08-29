@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
+const jwt = require('jsonwebtoken');
+
 // initialize mongo connection
 require('./utils/db');
 
@@ -20,6 +22,20 @@ app.use(bodyParser.json());
 // TODO: Automate doc generation
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html', { root: __dirname });
+});
+
+// grab user info from jwt
+app.use(async (req, res, next) => {
+  try {
+    const authHeader = req.get('authorization');
+    if (authHeader) {
+      const payload = await jwt.decode(authHeader.split(' ')[1]);
+      req.user = payload.user;
+    }
+  } catch (err) {
+    next(err);
+  }
+  next();
 });
 
 // Load routes

@@ -4,7 +4,8 @@ const config = require('../.config/dev.config.js');
 
 // TODO: use async version?
 const generateToken = (user) => {
-  return jwt.sign({ user },
+  const body = { username: user.username, worlds: user.worlds };
+  return jwt.sign({ user: body },
     config.jwt.secret,
     { expiresIn: config.jwt.expiration, algorithm: config.jwt.algorithm });
 };
@@ -12,8 +13,7 @@ const generateToken = (user) => {
 module.exports.signup = async (req, res, next) => {
   req.login(req.user, { session: false }, async (error) => {
     if (error) return next(error);
-    const body = { _id: req.user.id, username: req.user.username };
-    const token = generateToken(body);
+    const token = generateToken(req.user);
     return res.json({ token });
   });
 };
@@ -26,8 +26,7 @@ module.exports.login = async (req, res, next) => {
       }
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
-        const body = { _id: user.id, username: user.username };
-        const token = generateToken(body);
+        const token = generateToken(user);
         return res.json({ token });
       });
     } catch (error) {
