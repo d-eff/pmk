@@ -45,7 +45,12 @@
             "response",
             "$scope"
           ]
-        }]
+        }
+      ],
+      "no-shadow": ["error", {
+        "allow": ["state"]
+        }
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"

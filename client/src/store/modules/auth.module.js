@@ -1,10 +1,9 @@
-import Auth from '../../api/authService';
+import Auth from '../../api/auth.service';
 
 const state = {
   token: '',
 };
 
-/* eslint-disable */
 const mutations = {
   setToken(state, token) {
     state.token = token;
@@ -12,12 +11,15 @@ const mutations = {
 };
 
 const actions = {
-  //holy cow, es6 obj destructuring
-  async login ({ commit }, { username, password }) {
-    return Auth.login(username, password).then((response) => {
+  async login({ commit }, { username, password }) {
+    try {
+      const response = await Auth.login(username, password);
       commit('setToken', response.data.token);
-    });
-  }
+      return response.data.token;
+    } catch (err) {
+      return err;
+    }
+  },
 };
 
 export default {
