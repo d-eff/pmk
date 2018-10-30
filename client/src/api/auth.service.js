@@ -1,8 +1,8 @@
-import Api from './api';
+import API from './api';
 
 export default {
   async login(username, password) {
-    return Api().post('/login', {
+    return API().post('/login', {
       username,
       password,
     });

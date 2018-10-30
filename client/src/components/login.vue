@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import auth from '@/models/auth.model';
 
 export default {
   name: 'login',
@@ -16,15 +17,10 @@ export default {
       password: '',
     };
   },
-  computed: {
-    token() {
-      return this.$store.token;
-    },
-  },
   methods: {
     async login() {
       try {
-        const response = await this.$store.dispatch('auth/login', { username: this.username, password: this.password });
+        const response = await auth.login(this.username, this.password);
         console.log(response);
       } catch (err) {
         console.log(err);
