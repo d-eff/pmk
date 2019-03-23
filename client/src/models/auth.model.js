@@ -11,7 +11,9 @@ class Auth {
   async login(username, password) {
     try {
       const response = await authService.login(username, password);
-      this.data.token = response.data.token;
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      this.data.token = token;
       return true;
     } catch (err) {
       return err;

@@ -7,4 +7,7 @@ export default {
       password,
     });
   },
+  async signup(user) {
+    return API().post('/signup', user);
+  },
 };
